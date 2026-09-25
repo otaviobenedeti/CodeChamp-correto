@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CodeChamp</title>
+
+  <link rel="stylesheet" href="styleaula.css">
+</head>
+
+<body>
+
+  <header>
+
+    <div class="logo">
+
+      <div class="logo-icon">
+        <img src="./assets/logotrofeu.png" alt="logo">
+      </div>
+
+      <div>
+        <div class="logo-text">
+          CodeChamp
+        </div>
+
+        <div class="logo-sub">
+          Aprenda Programação com Desafios
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="header-icons">
+
+      <button class="icon-btn">
+        <a href="aula.html">👩‍🏫</a>
+      </button>
+
+      <button class="icon-btn">
+        <a href="perfil.html">👤</a>
+      </button>
+
+      <button class="icon-btn">
+        <a href="home.html">🔙</a>
+      </button>
+
+    </div>
+
+  </header>
+  <div class="search-section">
+
+    <div class="search-wrap">
+
+      <div class="filter-tags">
+
+        <span class="tag all active" onclick="setFilter('all', this)">
+          ✨ Todas
+        </span>
+
+        <span class="tag js" onclick="setFilter('javascript', this)">
+          ⚡ JavaScript
+        </span>
+
+        <span class="tag front" onclick="setFilter('frontend', this)">
+          🖥️ Frontend
+        </span>
+
+        <span class="tag back" onclick="setFilter('backend', this)">
+          🔧 Backend
+        </span>
+
+        <span class="tag cpp" onclick="setFilter('cpp', this)">
+          ⚙️ C++
+        </span>
+
+        <span class="tag python" onclick="setFilter('python', this)">
+          🐍 Python
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="page-body">
+
+    <div class="video-section">
+
+      <div class="video-player-card">
+
+        <div class="video-frame">
+
+          <iframe id="mainVideo" src="" title=""
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+
+        </div>
+
+        <div class="video-info">
+
+          <div class="video-category cat-js" id="videoCat">
+          </div>
+
+          <div class="video-title-row">
+
+            <div class="video-title" id="videoTitle">
+              CodeChamp
+            </div>
+
+
+            <button class="delete-video-btn" id="deleteVideoBtn" onclick="excluirAula()" title="Excluir vídeo">
+
+              🗑️
+
+            </button>
+
+          </div>
+
+          <div class="video-description" id="videoDescription"></div>
+
+
+          <div class="video-meta"></div>
+
+          <div class="video-actions">
+
+            <a class="yt-link" id="ytLink" href="" target="_blank">
+
+              ▶ Ver no YouTube
+
+            </a>
+
+            <button class="edit-video-btn" id="editVideoBtn" onclick="abrirEdicaoAula()">
+
+              ✏️ Editar
+
+            </button>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="playlist-sidebar">
+
+      <div class="playlist-card">
+
+
+        <div class="playlist-header">
+
+          <div class="playlist-title">
+            📚 PLAYLIST
+          </div>
+
+          <div class="playlist-count" id="lessonCount">
+
+            0
+
+          </div>
+
+        </div>
+
+
+        <div class="lesson-list" id="lessonList">
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <button class="fab-add" onclick="openAddModal()" title="Adicionar vídeo">
+
+    <span>+</span>
+
+  </button>
+
+  <div class="modal-overlay" id="addModal">
+
+
+    <div class="modal-card">
+
+
+      <div class="modal-header">
+
+        <div class="modal-title">
+          ➕ ADICIONAR VÍDEO
+        </div>
+
+
+        <button class="modal-close" onclick="closeAddModal()">
+
+          ✕
+
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="field-group">
+
+          <label class="field-label" for="newVideoName">
+
+            Nome do vídeo
+
+          </label>
+
+
+          <input class="field-input" type="text" id="newVideoName" placeholder="Ex: Introdução a Arrays em JS">
+
+        </div>
+
+
+        <!-- DESCRIÇÃO -->
+        <div class="field-group">
+
+          <label class="field-label" for="newVideoDescription">
+
+            Descrição
+
+          </label>
+
+
+          <textarea class="field-input" id="newVideoDescription" placeholder="Digite uma descrição para esta aula..."rows="4"></textarea>
+
+        </div>
+        <div class="field-group">
+
+          <label class="field-label" for="newVideoUrl">
+
+            URL do YouTube
+
+          </label>
+
+
+          <input class="field-input" type="text" id="newVideoUrl" placeholder="https://www.youtube.com/watch?v=...">
+
+
+          <span class="field-hint">
+
+            Aceita links do tipo youtube.com/watch?v=,
+            youtu.be/ ou embed/
+
+          </span>
+
+        </div>
+
+
+        <!-- LINGUAGEM -->
+        <div class="field-group">
+
+          <label class="field-label" for="newVideoLang">
+
+            Linguagem / Categoria
+
+          </label>
+
+
+          <select class="field-select" id="newVideoLang">
+
+            <option value="javascript">
+              ⚡ JavaScript
+            </option>
+
+            <option value="frontend">
+              🖥️ Frontend
+            </option>
+
+            <option value="backend">
+              🔧 Backend
+            </option>
+
+            <option value="cpp">
+              ⚙️ C++
+            </option>
+
+            <option value="python">
+              🐍 Python
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- ERRO -->
+        <span class="field-error" id="modalError">
+        </span>
+
+
+        <!-- BOTÃO -->
+        <button class="modal-submit" onclick="submitNewVideo()">
+
+          ADICIONAR À PLAYLIST
+
+        </button>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MODAL EDITAR -->
+  <div class="modal-overlay" id="editModal">
+
+
+    <div class="modal-card">
+
+
+      <div class="modal-header">
+
+        <div class="modal-title">
+          ✏️ EDITAR VÍDEO
+        </div>
+
+
+        <button class="modal-close" onclick="fecharEdicaoAula()">
+
+          ✕
+
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+
+        <!-- NOME -->
+        <div class="field-group">
+
+          <label class="field-label" for="editVideoName">
+
+            Nome do vídeo
+
+          </label>
+
+
+          <input class="field-input" type="text" id="editVideoName" placeholder="Nome da aula">
+
+        </div>
+
+
+        <!-- DESCRIÇÃO -->
+        <div class="field-group">
+
+          <label class="field-label" for="editVideoDescription">  Descrição</label>
+
+
+          <textarea class="field-input" id="editVideoDescription" placeholder="Digite uma descrição..." rows="4">
+          </textarea>
+
+        </div>
+
+
+        <!-- URL -->
+        <div class="field-group">
+
+          <label class="field-label" for="editVideoUrl">
+
+            URL do YouTube
+
+          </label>
+
+
+          <input class="field-input" type="text" id="editVideoUrl" placeholder="https://www.youtube.com/watch?v=...">
+
+        </div>
+
+
+        <!-- LINGUAGEM -->
+        <div class="field-group">
+
+          <label class="field-label" for="editVideoLang">
+
+            Linguagem / Categoria
+
+          </label>
+
+
+          <select class="field-select" id="editVideoLang">
+
+            <option value="javascript">
+              ⚡ JavaScript
+            </option>
+
+            <option value="frontend">
+              🖥️ Frontend
+            </option>
+
+            <option value="backend">
+              🔧 Backend
+            </option>
+
+            <option value="cpp">
+              ⚙️ C++
+            </option>
+
+            <option value="python">
+              🐍 Python
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- ERRO -->
+        <span class="field-error" id="editModalError">
+        </span>
+
+
+        <!-- SALVAR -->
+        <button class="modal-submit" onclick="salvarEdicaoAula()">
+
+          SALVAR ALTERAÇÕES
+
+        </button>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+
+    ✅ Vídeo adicionado!
+
+  </div>
+
+
+  <script src="aula.js"></script>
+
+</body>
+
+</html>
